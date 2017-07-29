@@ -1,11 +1,13 @@
 language: node_js
-node_js:
-  - "8"
+node_js: "8"
 
+# Cache local yarn packages
 cache: yarn
 
+# Install dependencies
 install: yarn
 
+# Run type check and tests
 script:
   - yarn type
-  - yarn test
+  - yarn test -- --coverage
