@@ -1,0 +1,10 @@
+{
+    "compilerOptions": {
+        "target": "es6",
+        "strict": true,
+        "outDir": "../lib"
+    },
+    "files": [
+        "../src/stack.ts"
+    ]
+}
