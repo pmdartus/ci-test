@@ -8,11 +8,12 @@
   "author": "Pierre-Marie <p.dartus@salesforce.com>",
   "license": "MIT",
   "scripts": {
-    "test": "jest",
+    "clean": "rimraf dist lib",
     "build": "npm run build:dist && npm run build:lib",
     "build:dist": "tsc -p scripts/tsconfig.dist.json",
     "build:lib": "tsc -p scripts/tsconfig.lib.json",
-    "clean": "rimraf dist lib",
+    "type": "tsc --noEmit -p scripts/tsconfig.lib.json",
+    "test": "jest",
     "prepare": "npm run clean && npm run build"
   },
   "devDependencies": {
@@ -26,6 +27,7 @@
     "transform": {
       ".(ts|tsx)": "<rootDir>/node_modules/ts-jest/preprocessor.js"
     },
+    "mapCoverage": true,
     "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js)$",
     "moduleFileExtensions": [
       "ts",

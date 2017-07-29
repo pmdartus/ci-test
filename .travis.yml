@@ -4,8 +4,8 @@ node_js:
 
 cache: yarn
 
-install:
-  - yarn
+install: yarn
 
-test:
+script:
+  - yarn type
   - yarn test
