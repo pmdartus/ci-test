@@ -1,10 +1,10 @@
 {
-  "name": "stack-test",
+  "name": "ci-test",
   "description": "Package to test differerent CI",
   "version": "1.0.0",
   "main": "dist/stack.js",
   "module": "lib/stack.js",
-  "repository": "git@github.com:pmdartus/travis-test.git",
+  "repository": "git@github.com:pmdartus/ci-test.git",
   "author": "Pierre-Marie <p.dartus@salesforce.com>",
   "license": "MIT",
   "scripts": {
