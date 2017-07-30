@@ -25,5 +25,9 @@ jobs:
       - run: yarn type
       - run: yarn test -- --coverage
       - run: yarn build
-      - run: yarn test:integration
+      - run:
+        name: Integration tests
+        command: yarn test:integration
+        environment:
+          USE_SAUCE: true
 

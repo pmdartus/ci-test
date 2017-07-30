@@ -62,8 +62,10 @@ if (USE_SAUCE && SAUCE_USERNAME && SAUCE_ACCESS_KEY) {
         });
     }
 } else {
+    // Require java to be installed on the machine
     config.services.push('selenium-standalone');
 
+    // Require chrome 60+ to be installed on the machine
     config.capabilities.push({
         browserName: 'chrome',
         chromeOptions: {
