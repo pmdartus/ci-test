@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`render attributes 1`] = `
+<h1
+  class="title"
+  style="color: red;"
+>
+  Hello world
+</h1>
+`;
+
+exports[`render nested children 1`] = `
+<ul>
+  <li>
+    foo
+  </li>
+  <li>
+    bar
+  </li>
+  <li>
+    baz
+  </li>
+</ul>
+`;
+
+exports[`render simple element 1`] = `<h1 />`;
+
+exports[`render simple element 2`] = `
+<h1>
+  Hello world
+</h1>
+`;

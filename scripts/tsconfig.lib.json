@@ -5,6 +5,6 @@
         "outDir": "../lib"
     },
     "files": [
-        "../src/stack.ts"
+        "../src/retag.ts"
     ]
 }
