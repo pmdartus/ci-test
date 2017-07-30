@@ -15,16 +15,31 @@ jobs:
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
 
+      # Install dependencies
       - run: yarn install
 
+      # Save dependencies if updated
       - save_cache:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "yarn.lock" }}
-        
-      - run: yarn type
-      - run: yarn test -- --coverage
+      
+      - run: 
+          name: Type check
+          command: yarn type
+      
       - run: yarn build
+      - store_artifacts:
+          path: dist
+      - store_artifacts:
+        path: lib
+
+      - run:
+          name: Unit tests
+          command: yarn test -- --coverage
+      - store_artifacts:
+          path: coverage
+      
       - run:
           name: Integration tests
           command: yarn test:integration
