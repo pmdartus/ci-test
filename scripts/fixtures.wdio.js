@@ -45,11 +45,13 @@ const config = {
 
 if (SAUCE_USERNAME && SAUCE_ACCESS_KEY) {
     config.services.push('sauce');
+
+    const isSauceConnectRunning = !TRAVIS_JOB_NUMBER;
     
     Object.assign(config, {
         user: process.env.SAUCE_USERNAME,
         key: process.env.SAUCE_ACCESS_KEY,
-        sauceConnect: true,
+        sauceConnect: !isSauceConnectRunning,
     });
 
     config.capabilities.push({
