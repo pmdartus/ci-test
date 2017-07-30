@@ -23,4 +23,5 @@ install: yarn
 script:
 - yarn type
 - yarn test -- --coverage
+- yarn build 
 - yarn test:integration

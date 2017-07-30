@@ -24,5 +24,6 @@ jobs:
         
       - run: yarn type
       - run: yarn test -- --coverage
+      - run: yarn build
       - run: yarn test:integration
 
