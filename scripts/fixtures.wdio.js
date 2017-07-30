@@ -54,10 +54,6 @@ if (SAUCE_USERNAME && SAUCE_ACCESS_KEY) {
         sauceConnect: !isSauceConnectRunning,
     });
 
-    config.capabilities.push({
-        browserName: 'firefox'
-    });
-
     // Necessary to reroute the requests through the sauce lab proxy
     // https://docs.travis-ci.com/user/sauce-connect/
     // http://webdriver.io/guide/usage/cloudservices.html#With-Travis-CI
