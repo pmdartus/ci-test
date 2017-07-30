@@ -8,17 +8,13 @@ jobs:
     steps:
       - checkout
 
-      # Download and cache dependencies
       - restore_cache:
           keys:
           - v1-dependencies-{{ checksum "yarn.lock" }}
-          # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
 
-      # Install dependencies
       - run: yarn install
 
-      # Save dependencies if updated
       - save_cache:
           paths:
             - node_modules
@@ -37,6 +33,9 @@ jobs:
       - run:
           name: Unit tests
           command: yarn test -- --coverage
+      - run:
+          name: Upload code coverage
+          command: ./node_modules/.bin/codecov
       - store_artifacts:
           path: coverage
       
