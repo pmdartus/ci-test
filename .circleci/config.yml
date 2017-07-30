@@ -32,7 +32,7 @@ jobs:
       - store_artifacts:
           path: dist
       - store_artifacts:
-        path: lib
+          path: lib
 
       - run:
           name: Unit tests
