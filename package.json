@@ -37,6 +37,7 @@
     },
     "mapCoverage": true,
     "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js)$",
+    "roots": ["<rootDir>/src/"],
     "moduleFileExtensions": [
       "ts",
       "tsx",
