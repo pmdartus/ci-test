@@ -1,5 +1,5 @@
 {
-  "name": "ci-test",
+  "name": "retag",
   "description": "Package to test differerent CI",
   "version": "1.0.0",
   "main": "dist/stack.js",
