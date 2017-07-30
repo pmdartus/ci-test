@@ -1,18 +1,22 @@
 language: node_js
-node_js: "8"
+node_js: '8'
 
-# Cache local yarn packages
+# SAUCE_USERNAME and SAUCE_ACCESS_KEY encrypted environment variables
+env:
+  global:
+  - secure: fuiUI788sJ34dycJL7441Bep5fQwd4cCi+pD+8oWAHPM5cV+WupVYWS7BIl2Vc7nJzfeiztUbpHYkUNoEqn+CxSbpzNGB2J2qDAHrKuql9h+zqL3+q0Qs/Yi89HLGcV188DlsOAi8MJXPnZ21Gb5jetb30KPOg8HzCfbt4H4YRyWigsK4RJXSMwUPUSI7j+k0AwjbE2XRMvDe8vlSgRLLChggQzPs5bq3Q5YZFglOR1pntGIf9ZZXGCYQmkvVM/dL38NwWFsSgwaQiDJPcc+0T6i6woD/wEeXBRYz4VF8rkkRoQp+okww4E4Ml/VUF1hHnd8Twbv0VxgypFnkKyT8OPinPaiG5H1jLY3oiTCqcFCAivvrMjSb2yxj8BgmFp41f5sclqcOWRYpcAksnhpz7VcaiLAkawsvcbk7FMoXwFDUkfoyI6M28Wz0qIuEO1GkT7ub0j0/XJPUDkCziYB4CMnWAAOXyNj+80y1DiXqjBcE0+LQBhQ9rGWUylmQ+3S1HFXNjZHP2irbOaH1mscN1v6teRKYVrSgxGCAnvEChOt53REUZaOJuAz8uJ+0DEwMRV+rAgvdH0Hco3Gx3NxU4ai8zsVgZJZZoixgI6BVnxi7y+izl6TwIpo2J0Xk8EJHYu1zOlQuPIq4ba4fuhICSikR19e6mliQIr4PtF8KWU=
+  - secure: OnUG6g1U9j+SV4R6ms1iI11VN1kqEqmCPIgUihxcwu6goTHEv08ue82XgeGYHiAA1vcjxtW9Pijh/iTpk7w6j85EdwXbgMjbxVhAl+CA38Vn+/dmnPxRa78YQwI9CDwiV5s0pfV51wnDf7N9iMcjg/zoaasphKgb/YgezyLoZfxKMw8ndY83GtODg6joeFuiyl+gmUCRqoyt4tlVi5/kc7fDQmJnUmCgTb2fjAKRd1umRJNSHLvvEG+ezLqrpN5Yx+SgF0lA/wyWGQNDMxPbdc10NmaaADSYIbJbLg9Z943M33BMcq9y/7tcJ9p/5HjD3/yXfOLLU5a8R6JPAB54XSr/r5Nq1urZYVz+bE9boPKIgqlWKwxTZ8hRQtuqN3A4zn9SvF/B6luiD1Um9Cy2DAjm2Z+ynqpQFiGwjry+LLIF+NBt5XjEttAqNtBU5UAjbhtt9DN8pU7NYilxf8Hf8Ja8tB4NTZjXv+KLHrBWRikVsykQEa2MJlznKfM8p8d/sq1KT7/ACmDTpWf2cUKMIEVSdTVq3nj5LXaENXp57h32Gg6ByXWeT/hkednCPGFYSF6pqioUoM3/OGKeJmkjYgzVA59MP3MxbNSDjuxvSC4hPfJbZUmaUre4I7XiBv3DXghwEm5MMSu9SY/V6XeJkQRJzPOFuoGDufNrCN7VnpU=
+
+# Cache local npm repository
 cache: yarn
 
-# Preinstall saucelab on the machine
+# Enable sauce connect
 addons:
   sauce_connect: true
 
-# Install dependencies
 install: yarn
 
-# Run type check and tests
 script:
-  - yarn type
-  - yarn test -- --coverage
-  - yarn test:integration
+- yarn type
+- yarn test -- --coverage
+- yarn test:integration
