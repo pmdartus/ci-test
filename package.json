@@ -8,14 +8,15 @@
   "author": "Pierre-Marie <p.dartus@salesforce.com>",
   "license": "MIT",
   "scripts": {
-    "clean": "rimraf dist lib",
+    "clean": "rimraf dist lib fixtures/**/dist",
     "build": "npm run build:dist && npm run build:lib && npm run build:fixtures",
     "build:dist": "tsc -p scripts/tsconfig.dist.json",
     "build:lib": "tsc -p scripts/tsconfig.lib.json",
     "build:fixtures": "rollup -c scripts/fixtures.rollup.js",
     "type": "tsc --noEmit -p scripts/tsconfig.lib.json",
     "test": "jest",
-    "prepare": "npm run clean && npm run build"
+    "test:integration": "wdio scripts/fixtures.wdio.js",
+    "prepublishOnly": "npm run clean && npm run build"
   },
   "devDependencies": {
     "@types/jest": "^20.0.5",
@@ -23,7 +24,12 @@
     "rimraf": "^2.6.1",
     "rollup": "^0.45.2",
     "ts-jest": "^20.0.7",
-    "typescript": "^2.4.2"
+    "typescript": "^2.4.2",
+    "wdio-mocha-framework": "^0.5.10",
+    "wdio-sauce-service": "^0.4.0",
+    "wdio-selenium-standalone-service": "^0.0.9",
+    "wdio-static-server-service": "^1.0.1",
+    "webdriverio": "^4.8.0"
   },
   "jest": {
     "transform": {
