@@ -11,8 +11,12 @@ env:
 cache: yarn
 
 # Enable sauce connect
+# addons:
+#   sauce_connect: true
+
+# Make sure box has chrome installed
 addons:
-  sauce_connect: true
+  chrome: stable
 
 install: yarn
 

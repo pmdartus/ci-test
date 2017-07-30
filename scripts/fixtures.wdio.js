@@ -2,6 +2,7 @@ const path = require('path');
 
 const APP_PORT = 8080;
 const {
+    USE_SAUCE,
     SAUCE_USERNAME,
     SAUCE_ACCESS_KEY,
     TRAVIS_JOB_NUMBER,
@@ -20,9 +21,7 @@ const config = {
     ],
     
     maxInstances: 10,
-    capabilities: [{
-        browserName: 'chrome'
-    }],
+    capabilities: [],
     
     sync: true,
     coloredLogs: true,
@@ -43,9 +42,8 @@ const config = {
     ]
 };
 
-if (SAUCE_USERNAME && SAUCE_ACCESS_KEY) {
+if (USE_SAUCE && SAUCE_USERNAME && SAUCE_ACCESS_KEY) {
     config.services.push('sauce');
-
 
     const isSauceConnectRunning = !!TRAVIS_JOB_NUMBER;
     
@@ -65,6 +63,13 @@ if (SAUCE_USERNAME && SAUCE_ACCESS_KEY) {
     }
 } else {
     config.services.push('selenium-standalone');
+
+    config.capabilities.push({
+        browserName: 'chrome',
+        chromeOptions: {
+            args: ['--headless', '--disable-gpu'],
+        }
+    });
 }
 
 exports.config = config;
