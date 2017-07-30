@@ -31,3 +31,15 @@ test('render attributes', () => {
 
     expect(root).toMatchSnapshot();
 });
+
+test('handle click', () => {
+    const handler = jest.fn();
+    const root = t.button({
+        onclick: handler
+    }, [
+        'My button'
+    ]);
+
+    root.click();
+    expect(handler).toBeCalled();
+});

@@ -1,9 +1,9 @@
 type TagChild = Node | string;
 
-function tag(name: string): Element;
-function tag(name: string, children: TagChild[]): Element;
-function tag(name: string, props: any, children: TagChild[]): Element;
-function tag(name: string): Element {
+function tag(name: string): HTMLElement;
+function tag(name: string, children: TagChild[]): HTMLElement;
+function tag(name: string, props: any, children: TagChild[]): HTMLElement;
+function tag(name: string): HTMLElement {
     let props: any = {};
     let children: TagChild[] = [];
 
@@ -16,7 +16,7 @@ function tag(name: string): Element {
 
     const elm = document.createElement(name);
     for (let child of children) {
-        if (typeof child === 'string') {
+        if (!(child instanceof Node)) {
             child = document.createTextNode(child);
         }
 
@@ -37,9 +37,9 @@ function tag(name: string): Element {
 }
 
 interface TagFactory {
-    (): Element;
-    (children: TagChild[]): Element;
-    (props: object, children?: TagChild[]): Element;
+    (): HTMLElement;
+    (children: TagChild[]): HTMLElement;
+    (props: object, children?: TagChild[]): HTMLElement;
 } 
 
 type TagCache = { [name: string]: TagFactory };

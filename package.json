@@ -9,9 +9,10 @@
   "license": "MIT",
   "scripts": {
     "clean": "rimraf dist lib",
-    "build": "npm run build:dist && npm run build:lib",
+    "build": "npm run build:dist && npm run build:lib && npm run build:fixtures",
     "build:dist": "tsc -p scripts/tsconfig.dist.json",
     "build:lib": "tsc -p scripts/tsconfig.lib.json",
+    "build:fixtures": "rollup -c scripts/fixtures.rollup.js",
     "type": "tsc --noEmit -p scripts/tsconfig.lib.json",
     "test": "jest",
     "prepare": "npm run clean && npm run build"
@@ -20,6 +21,7 @@
     "@types/jest": "^20.0.5",
     "jest": "^20.0.4",
     "rimraf": "^2.6.1",
+    "rollup": "^0.45.2",
     "ts-jest": "^20.0.7",
     "typescript": "^2.4.2"
   },
