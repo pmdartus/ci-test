@@ -3,7 +3,8 @@ const path = require('path');
 const APP_PORT = 8080;
 const {
     SAUCE_USERNAME,
-    SAUCE_ACCESS_KEY
+    SAUCE_ACCESS_KEY,
+    TRAVIS_JOB_NUMBER,
 } = process.env;
 
 const resolve = (...args) => (
@@ -54,6 +55,15 @@ if (SAUCE_USERNAME && SAUCE_ACCESS_KEY) {
     config.capabilities.push({
         browserName: 'firefox'
     });
+
+    // Necessary to reroute the requests through the sauce lab proxy
+    // https://docs.travis-ci.com/user/sauce-connect/
+    // http://webdriver.io/guide/usage/cloudservices.html#With-Travis-CI
+    if (TRAVIS_JOB_NUMBER) {
+        config.capabilities.forEach(capability => {
+            capability['tunnel-identifier'] = TRAVIS_JOB_NUMBER;
+        });
+    }
 } else {
     config.services.push('selenium-standalone');
 }
