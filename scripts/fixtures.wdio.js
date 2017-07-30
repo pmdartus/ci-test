@@ -44,6 +44,9 @@ const config = {
 
 if (USE_SAUCE && SAUCE_USERNAME && SAUCE_ACCESS_KEY) {
     config.services.push('sauce');
+    config.capabilities.push({
+        browserName: 'chrome',
+    });
 
     const isSauceConnectRunning = !!TRAVIS_JOB_NUMBER;
     
