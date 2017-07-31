@@ -8,10 +8,11 @@
   "author": "Pierre-Marie <p.dartus@salesforce.com>",
   "license": "MIT",
   "scripts": {
-    "clean": "rimraf dist fixtures/**/dist",
-    "build": "npm run build:dist && npm run build:fixtures",
+    "clean": "rimraf dist fixtures/**/dist performance/**/dist",
+    "build": "npm run build:dist && npm run build:fixtures && npm run build:performance",
     "build:dist": "rollup -c scripts/build.rollup.js",
     "build:fixtures": "rollup -c scripts/fixtures.rollup.js",
+    "build:performance": "rollup -c scripts/performance.rollup.js",
     "type": "tsc --noEmit -p scripts/tsconfig.lib.json",
     "test": "jest",
     "test:integration": "wdio scripts/fixtures.wdio.js",
@@ -19,6 +20,8 @@
   },
   "devDependencies": {
     "@types/jest": "^20.0.5",
+    "chrome-launcher": "^0.3.2",
+    "chrome-remote-interface": "^0.24.3",
     "codecov": "^2.2.0",
     "jest": "^20.0.4",
     "rimraf": "^2.6.1",

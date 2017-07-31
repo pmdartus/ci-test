@@ -5,7 +5,9 @@ const typescript = require('rollup-plugin-typescript2');
 module.exports = {
     entry: path.resolve(__dirname, '../src/retag.ts'),
     plugins: [
-        typescript(),
+        typescript({
+            cacheRoot: `/tmp`
+        }),
     ],
     moduleName: 'retag',
     targets: [{

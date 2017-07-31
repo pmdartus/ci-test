@@ -7,29 +7,83 @@
 <body>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/benchmark/2.1.4/benchmark.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.js"></script> -->
+
+    <script src="dist/benchmarks.js"></script>
 
     <script>
-        var suite = new Benchmark.Suite;
+        function loadBenchmarks(url) {
+            document.write('<script src="' + url + '" type="text/javascript"><\/script>');
+            return window.retagBenchmarks;
+        }
 
-        // add tests
-        suite.add('RegExp#test', function () {
-            /o/.test('Hello World!');
-        })
-            .add('String#indexOf', function () {
-                'Hello World!'.indexOf('o') > -1;
-            })
-            .add('String#match', function () {
-                !!'Hello World!'.match(/o/);
-            })
-            // add listeners
-            .on('cycle', function (event) {
-                console.log(String(event.target));
-            })
-            .on('complete', function () {
-                console.log('Fastest is ' + this.filter('fastest').map('name'));
-            })
-            // run async
-            .run({ 'async': true });
+        function bundlesToSuites(bundles) {
+            const flatten = _.flatMap(bundles, bundle => {
+                const { label, benchmarks } = bundle;
+                
+                return benchmarks.map(benchmark => ({
+                    label,
+                    bundle,
+                    benchmark,
+                }));
+            });
+
+            const grouped = _.groupBy(flatten, ({ benchmark }) => (
+                benchmark.name
+            ));
+
+            return _.map(_.toPairs(grouped), ([key, value]) => {
+                const suite = new Benchmark.Suite(key);
+
+                _.forEach(value, ({ label, benchmark }) => {
+                    suite.add(label, benchmark.fn, benchmark.options);
+                });
+
+                return suite;
+            });
+        }
+
+        function run(suite) {
+            return new Promise((resolve, reject) => {
+                suite.on('cycle', event => {
+                    console.log(`${suite.name} - ${event.target}`);
+                });
+
+                suite.on('complete', resolve);
+                suite.on('error', ({ target }) => {
+                    reject(target.error);
+                });
+                
+                suite.run({ 
+                    'async': true,
+                });
+            }).then(() => ({
+                name: suite.name,
+                fastest: suite.filter('fastest').map('name'),
+                stats: suite.map(benchmark => ({
+                    name: benchmark.name,
+                    formatted: benchmark.toString(),
+                    value: benchmark.stats,
+                })),
+            }));
+        }
+
+        (async () => {
+            const bundles = [{
+                label: 'base',
+                benchmarks: loadBenchmarks('dist/benchmarks.js').benchmarks,
+            }, {
+                label: 'target',
+                benchmarks: loadBenchmarks('dist/benchmarks.js').benchmarks,
+            }];
+
+            const results = [];
+            for (let suite of bundlesToSuites(bundles)) {
+                const res = await run(suite);
+                results.push(res);
+            }
+            return results;
+        })();
     </script>
 </body>
 

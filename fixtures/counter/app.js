@@ -1,4 +1,4 @@
-import t from '../../dist/retag.esm';
+import t from '../../dist/retag.esm.js';
 
 let value = 0;
 const counterSpan = t.span({ 
